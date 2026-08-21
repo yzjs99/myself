@@ -1,43 +1,34 @@
-import Reveal from './Reveal.jsx'
+import Accordion from './Accordion.jsx'
+import { profile } from '../data/resume.js'
 
-const contacts = [
-  { icon: '✉️', label: '邮箱', value: 'zhaoyunqi@example.com', href: 'mailto:zhaoyunqi@example.com' },
-  { icon: '🐙', label: 'GitHub', value: 'github.com/zhaoyunqi', href: 'https://github.com' },
-  { icon: '💬', label: '微信', value: 'zhaoyunqi_dev', href: null },
+const channels = [
+  { icon: '✉️', label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  { icon: '📞', label: 'Phone', value: profile.phone, href: `tel:${profile.phone.replace(/[^+\d]/g, '')}` },
+  { icon: '💼', label: 'LinkedIn', value: profile.linkedin, href: profile.linkedinUrl },
+  { icon: '🐙', label: 'GitHub', value: profile.github, href: profile.githubUrl },
 ]
 
 export default function Contact() {
   return (
-    <section id="contact">
-      <Reveal>
-        <p className="section-title">Contact</p>
-        <h2 className="section-heading">联系我</h2>
-        <p className="contact-text">
-          无论是技术交流、项目合作还是随便聊聊，都欢迎通过以下方式找到我。
-          通常会在 1-2 天内回复。
-        </p>
-        <div className="contact-links">
-          {contacts.map((c) =>
-            c.href ? (
-              <a
-                key={c.label}
-                className="contact-link"
-                href={c.href}
-                target={c.href.startsWith('http') ? '_blank' : undefined}
-                rel="noreferrer"
-              >
-                <span>{c.icon}</span>
-                {c.value}
-              </a>
-            ) : (
-              <span key={c.label} className="contact-link">
-                <span>{c.icon}</span>
-                {c.value}
-              </span>
-            ),
-          )}
-        </div>
-      </Reveal>
-    </section>
+    <Accordion id="contact" index="05" title="联系方式" subtitle="Get in Touch">
+      <p className="contact-intro">
+        无论是技术交流、项目合作还是随便聊聊，都欢迎通过以下方式找到我，通常 1-2 天内回复。
+      </p>
+      <div className="contact-grid">
+        {channels.map((c) => (
+          <a
+            key={c.label}
+            className="contact-card"
+            href={c.href}
+            target={c.href.startsWith('http') ? '_blank' : undefined}
+            rel="noreferrer"
+          >
+            <span className="contact-card-icon">{c.icon}</span>
+            <span className="contact-card-label">{c.label}</span>
+            <span className="contact-card-value">{c.value}</span>
+          </a>
+        ))}
+      </div>
+    </Accordion>
   )
 }
