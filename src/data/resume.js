@@ -19,19 +19,54 @@ export const profile = {
 }
 
 export const skills = [
-  { label: { zh: '硬件', en: 'Hardware' }, items: ['Ascend 910B/310', 'CANN', 'ATC', 'OM/ONNX', 'AscendC'] },
-  { label: { zh: '训练', en: 'Training' }, items: ['MindSpeed', 'DeepSpeed', 'Megatron-LM', 'LoRA/QLoRA', 'Distillation'] },
-  { label: { zh: '推理', en: 'Inference' }, items: ['MindIE', 'vLLM', 'SGLang', 'Ollama', 'OpenWebUI'] },
-  { label: { zh: 'MLOps', en: 'MLOps' }, items: ['Kubernetes', 'Docker', 'NFS', 'conda', 'Git'] },
-  { label: { zh: '框架', en: 'Frameworks' }, items: ['PyTorch', 'Transformers', 'LLama-Factory', 'ms-swift', 'Dify', 'ComfyUI'] },
-  { label: { zh: '语言', en: 'Languages' }, items: ['Python', 'C/C++', 'SQL', 'LaTeX', 'Shell'] },
+  {
+    label: { zh: 'AI 基础设施', en: 'AI Infrastructure' },
+    items: ['NVIDIA', 'Huawei Ascend', 'MetaX', 'CUDA', 'CANN', 'ATC', 'OM/ONNX', 'AscendC', 'OpenEuler 22.03', 'Slurm', 'Docker', 'Kubernetes', 'NFS'],
+  },
+  {
+    label: { zh: '模型训练', en: 'Model Training' },
+    items: ['PyTorch', 'DeepSpeed', 'Megatron-LM', 'LLaMA-Factory', 'LoRA/QLoRA', 'Reinforcement Learning', 'K-fold CV', 'EMA'],
+  },
+  {
+    label: { zh: 'LLM 与检索', en: 'LLM & Retrieval' },
+    items: ['vLLM', 'RAG', 'AI Agents', 'LangGraph', 'PostgreSQL / Vector Search', 'MinIO'],
+  },
+  {
+    label: { zh: '语言与工具', en: 'Languages & Tools' },
+    items: ['Python', 'C/C++', 'SQL', 'Shell', 'Git', 'NumPy', 'Pandas', 'OpenCV'],
+  },
 ]
 
 export const workExperience = [
   {
+    id: 'cair',
+    role: { zh: 'Ascend 算法工程师', en: 'Ascend Algorithm Engineer' },
+    company: { zh: 'CAIR · 中科院香港创新院', en: 'CAIR · HK Institute of Science & Innovation, CAS' },
+    period: 'Jan 2026 – Present',
+    highlight: {
+      zh: 'NVIDIA→Ascend 训练迁移 · 医院 AI 端到端交付',
+      en: 'NVIDIA-to-Ascend migration · End-to-end hospital AI delivery',
+    },
+    points: [
+      {
+        zh: '主导 NVIDIA 到 Ascend 的训练迁移，端到端负责医院 AI 交付：需求澄清、研发、实现、调优、部署、文档与维护。',
+        en: 'Lead NVIDIA-to-Ascend training migration with end-to-end hospital AI delivery: requirements clarification, R&D, implementation, tuning, deployment, documentation and maintenance.',
+      },
+      {
+        zh: '作为唯一项目负责人交付喉镜 AI 诊断与超声报告检索两大项目（详见「个人项目」）。',
+        en: 'Sole project lead for the JingJie laryngoscopy diagnostic model and the ultrasound AI report retrieval system (see "Selected Projects").',
+      },
+      {
+        zh: '独立在 OpenEuler 22.03 上适配 Slurm 支持 Ascend 多机多卡训练，成果并入 CARES 3.0 发布。',
+        en: 'Independently adapted Slurm for Ascend on OpenEuler 22.03, enabling multi-node, multi-card Ascend 910B training; incorporated into the CARES 3.0 release.',
+      },
+    ],
+  },
+  {
+    id: 'huawei',
     role: { zh: 'Ascend FAE & 智能计算团队负责人', en: 'Ascend FAE & Intelligent Computing Team Lead' },
     company: { zh: '华为国际（香港）', en: 'Huawei International (Hong Kong)' },
-    period: 'Feb 2023 – Jan 2026',
+    period: 'Feb 2023 – Dec 2025',
     highlight: {
       zh: '连续三年 A (Best) 绩效 · Best Newcomer Award',
       en: '3 consecutive years of A (Best) performance · Best Newcomer Award',
@@ -55,42 +90,82 @@ export const workExperience = [
       },
     ],
   },
-  {
-    role: { zh: '研发工程师', en: 'R&D Engineer' },
-    company: { zh: '泰康保险集团 · 研发部', en: 'Taikang Insurance Group · R&D' },
-    period: 'Jun 2021 – Aug 2021',
-    highlight: { zh: 'Tai Homeland 项目', en: 'Tai Homeland Project' },
-    points: [
-      {
-        zh: '基于 Django 开发数据库模块，使用 Requests + Beautiful Soup 抓取财经新闻（标题、作者、时间、正文），提取关键词存入 MySQL。',
-        en: 'Built a database module with Django; used Requests + Beautiful Soup to scrape financial news (title, author, time, body) and extract keywords into MySQL.',
-      },
-      {
-        zh: '设计定时爬虫算法，确保新闻在更新后 1 分钟内入库。',
-        en: 'Designed a scheduled crawler algorithm ensuring news is ingested within 1 minute of publication.',
-      },
-      {
-        zh: '使用 TF-IDF 关键词提取算法对文章自动分类。',
-        en: 'Automatically classified articles using TF-IDF keyword extraction.',
-      },
-      {
-        zh: '设计增量缓存方法避免频繁数据库查询，最终信息以 O(n) 一次性入库。',
-        en: 'Designed an incremental caching scheme to avoid frequent DB queries; final ingestion runs in O(n) in a single pass.',
-      },
-      {
-        zh: '所设计模块最终应用于结果交付。',
-        en: 'The designed module was ultimately used in the final deliverable.',
-      },
-    ],
-  },
 ]
 
 export const projects = [
   {
+    title: { zh: 'JingJie · AI 喉镜诊断模型', en: 'JingJie: AI-Powered Laryngoscopy Diagnostic Model' },
+    workId: 'cair',
+    org: { zh: '山东省重大科技创新项目 · 唯一项目负责人', en: 'Shandong Provincial Major S&T Innovation Project · Sole Project Lead' },
+    role: { zh: '唯一技术负责人', en: 'Sole Technical Owner' },
+    period: 'May 2026 – Aug 2026',
+    points: [
+      {
+        zh: '作为唯一技术负责人交付山东省千佛山医院 AI 喉镜诊断方案：澄清临床工作流、解决部署问题，将 35 类病理 + 12 类解剖部位分类的平均准确率从 72% 提升至 95%，部署于华为 Ascend 与国产 MetaX C500 算力设备。',
+        en: 'Sole technical owner of an AI laryngoscopy diagnostic solution at Shandong Provincial Qianfoshan Hospital: clarified clinical workflows, resolved deployment issues, and raised average classification accuracy from 72% to 95% across 35 pathology and 12 anatomical-location classes; deployed on Huawei Ascend and domestic MetaX C500 devices.',
+      },
+      {
+        zh: '构建 DINOv2 医学图像分类器，使用 EMA 与 K 折交叉验证提升有限高质量样本下的鲁棒性；集成 Qwen3-8B 与 embedding 模型由分类结果生成诊断报告，使临床医生喉镜诊断效率提升 40%。',
+        en: 'Built a DINOv2 medical-image classifier; improved robustness under limited high-quality samples using EMA and K-fold cross-validation. Integrated Qwen3-8B and embedding models to generate diagnostic reports from classification results, improving clinicians\' laryngoscopy diagnostic efficiency by 40%.',
+      },
+      {
+        zh: '支撑山东省科技创新重点项目，后续部署至 7 家医院（含齐鲁医院、威海市妇幼保健院）；获内部「优秀项目」认定与团队奖。',
+        en: 'Supported a Shandong provincial S&T innovation priority project; subsequently deployed at 7 hospitals including Qilu Hospital and Weihai Maternal and Child Health Hospital. Recognized internally as an Outstanding Project and awarded a Team Award.',
+      },
+    ],
+  },
+  {
+    title: { zh: '超声 AI 报告检索系统', en: 'Ultrasound AI Report Retrieval' },
+    workId: 'cair',
+    org: { zh: '齐鲁医院 · 唯一项目负责人', en: 'Qilu Hospital · Sole Project Lead' },
+    role: { zh: '独立开发与测试', en: 'Sole Developer & Tester' },
+    period: 'Apr 2026 – Jul 2026',
+    points: [
+      {
+        zh: '独立负责齐鲁医院超声报告检索系统的开发与测试：使用 vLLM-Ascend 部署 Qwen3-VL-Embedding 与 Qwen3-VL-Reranker。',
+        en: 'Solely owned development and testing of an ultrasound-report retrieval system for Qilu Hospital: deployed Qwen3-VL-Embedding and Qwen3-VL-Reranker with vLLM-Ascend.',
+      },
+      {
+        zh: '历史数据向量化存入 PostgreSQL，超声图像存储于 MinIO，以 Docker Compose 交付并附 Web 检索界面。',
+        en: 'Vectorized historical data in PostgreSQL, stored ultrasound images in MinIO, and delivered a Docker Compose deployment with a web-based retrieval interface.',
+      },
+      {
+        zh: '检索效果验证：Recall@5 达 94%。',
+        en: 'Retrieval validation: Recall@5 of 94%.',
+      },
+    ],
+  },
+  {
+    title: { zh: 'Ascend AI 集群运维与基础设施部署', en: 'Ascend AI Cluster Operations & Infrastructure Deployment' },
+    workId: 'cair',
+    org: { zh: 'CAIR · 中科院香港创新院', en: 'CAIR · HK Institute of Science & Innovation, CAS' },
+    role: { zh: '集群运维负责人', en: 'Cluster Operations Owner' },
+    period: 'Jan 2026 – Present',
+    points: [
+      {
+        zh: '独立在 OpenEuler 22.03 上适配 Slurm 支持 Ascend 多机多卡 910B 训练，成果并入 CARES 3.0 发布。',
+        en: 'Independently adapted Slurm for Ascend on OpenEuler 22.03, enabling multi-node, multi-card Ascend 910B training; work was incorporated into the CARES 3.0 release.',
+      },
+      {
+        zh: '负责 Atlas 800T A2 服务器及配套存储/网络设备的运维；使用 CCAE 监控集群利用率，并为公司构建内部智能体系统。',
+        en: 'Owned operations for Atlas 800T A2 servers and supporting storage/network equipment; monitored cluster utilization with CCAE and built internal agent systems for company use.',
+      },
+      {
+        zh: '实现两节点 prefill–decode (PD) 分离，在 128K 上下文、16 路并发下达成 P95 TTFT 90s、聚合吞吐 150 tokens/s。',
+        en: 'Implemented two-node prefill–decode (PD) disaggregation, achieving a P95 TTFT of 90 s and 150 tokens/s aggregate throughput at 128K context length and 16-way concurrency.',
+      },
+      {
+        zh: '构建并运维基于 Kubernetes 的 Ascend 集群管理（Ascend Device Plugin、Docker Runtime、Volcano、Operator、NodeD、NPU Exporter、LDAP 用户管理），为约 150 名内部算力用户提供动态调度与资源分配。',
+        en: 'Built and operated Kubernetes-based Ascend cluster management with Ascend Device Plugin, Docker Runtime, Volcano, Operator, NodeD, NPU Exporter and LDAP user management; enabled dynamic scheduling and resource allocation for ~150 internal compute users.',
+      },
+    ],
+  },
+  {
     title: { zh: '医疗多模态大模型训练', en: 'Medical Multimodal LLM Training' },
+    workId: 'cair',
     org: { zh: 'CAIR · 中科院香港创新院', en: 'CAIR · HK Innovation Institute, CAS' },
     role: { zh: '技术总监 & 驻场 FAE', en: 'Technical Director & On-Site FAE' },
-    period: 'Jun 2025 – Present',
+    period: 'Jun 2025 – Dec 2025',
     points: [
       {
         zh: '负责计算、存储、网络设备的技审、设计与部署交付。',
@@ -116,6 +191,7 @@ export const projects = [
   },
   {
     title: { zh: '高危动作识别智能体', en: 'High-Risk Action Recognition Agent' },
+    workId: 'huawei',
     org: { zh: '中电控股（CLP）香港', en: 'CLP Power Hong Kong' },
     role: { zh: 'AI 工程师', en: 'AI Engineer' },
     period: 'Aug 2025 – Oct 2025',
@@ -136,9 +212,10 @@ export const projects = [
   },
   {
     title: { zh: '20P 算力集群运维与 POC 交付', en: '20P Compute Cluster Ops & POC Delivery' },
+    workId: 'huawei',
     org: { zh: '华为 AiLab（香港）', en: 'Huawei AiLab (Hong Kong)' },
     role: { zh: '维护者 & IT 工程师 & 讲师', en: 'Maintainer & IT Engineer & Instructor' },
-    period: 'Mar 2024 – Present',
+    period: 'Mar 2024 – Dec 2025',
     points: [
       {
         zh: '主导并参与 20P 算力集群的日常维护、权限配置与改造。',
@@ -224,7 +301,7 @@ export const education = [
   },
   {
     school: { zh: '北京化工大学', en: 'Beijing University of Chemical Technology' },
-    degree: { zh: '计算机科学与技术学士（实验班）', en: 'BSc Computer Science & Technology (Experimental Class)' },
+    degree: { zh: '计算机科学与技术工学学士（实验班）', en: 'BEng Computer Science & Technology (Experimental Class)' },
     period: 'Sep 2018 – Jun 2022',
     note: {
       zh: '计算机算法与设计 A+ · 数据结构 / C++ / 软件工程 / 计算机网络 / 编译原理',

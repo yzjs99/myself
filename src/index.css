@@ -99,6 +99,45 @@ body {
   }
 }
 
+/* ---------- TopBar 导航 ---------- */
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 auto;
+}
+
+.topbar-nav-link {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-soft);
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+
+.topbar-nav-link:hover {
+  color: var(--text);
+  background: var(--bg-soft);
+}
+
+.topbar-nav-link.active {
+  color: var(--accent);
+  background: rgba(26, 127, 55, 0.08);
+}
+
+.topbar-nav-index {
+  font-size: 10px;
+  opacity: 0.65;
+}
+
 .lang-toggle {
   display: flex;
   border: 1px solid var(--border);
@@ -304,6 +343,9 @@ a.contact-row:hover {
 /* ---------- Content ---------- */
 .content {
   padding: 44px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* ---------- Terminal ---------- */
@@ -313,7 +355,7 @@ a.contact-row:hover {
   overflow: hidden;
   background: #0d1117;
   box-shadow: 0 12px 32px rgba(31, 35, 40, 0.18);
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .terminal-bar {
@@ -376,27 +418,22 @@ a.contact-row:hover {
   opacity: 0;
 }
 
-/* ---------- Accordion ---------- */
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.accordion {
+/* ---------- Page（页面区块：简单标题 + 下拉框） ---------- */
+.page {
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--card);
   overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.25s;
+  scroll-margin-top: calc(var(--topbar-h) + 16px);
 }
 
-.accordion.open {
+.page.open {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px rgba(26, 127, 55, 0.15), 0 8px 24px rgba(31, 35, 40, 0.1);
 }
 
-.accordion-head {
+.page-head {
   width: 100%;
   display: flex;
   align-items: center;
@@ -411,63 +448,84 @@ a.contact-row:hover {
   transition: background 0.2s;
 }
 
-.accordion-head:hover {
+.page-head:hover {
   background: var(--bg-soft);
 }
 
-.accordion-index {
+.page-index {
   font-family: var(--mono);
   font-size: 13px;
   color: var(--accent);
   flex-shrink: 0;
 }
 
-.accordion-titles {
+.page-titles {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 0;
 }
 
-.accordion-title {
-  font-size: 17px;
+.page-title {
+  font-size: 18px;
   font-weight: 600;
 }
 
-.accordion-subtitle {
+.page-subtitle {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--text-soft);
 }
 
-.accordion-chevron {
+.page-chevron {
   transition: transform 0.3s;
   color: var(--text-soft);
   display: flex;
   flex-shrink: 0;
 }
 
-.accordion.open .accordion-chevron {
+.page.open .page-chevron {
   transform: rotate(180deg);
   color: var(--accent);
 }
 
-.accordion-body {
+.page-body {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.35s ease;
 }
 
-.accordion.open .accordion-body {
+.page.open .page-body {
   grid-template-rows: 1fr;
 }
 
-.accordion-inner {
+.page-inner {
   overflow: hidden;
 }
 
-.accordion-inner > * {
+.page-inner > * {
   padding: 4px 22px 24px;
+}
+
+.page-inner > * + * {
+  padding-top: 0;
+}
+
+.page-subhead {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 8px 0 14px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--border);
+}
+
+.page-inner > .page-subhead:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
 /* ---------- Entries ---------- */
@@ -601,7 +659,25 @@ a.contact-row:hover {
 }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .topbar-nav-label {
+    display: none;
+  }
+
+  .topbar-nav-link {
+    padding: 6px 8px;
+  }
+}
+
 @media (max-width: 900px) {
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .topbar-nav {
+    display: none;
+  }
+
   .layout {
     grid-template-columns: 1fr;
   }

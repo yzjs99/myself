@@ -1,10 +1,11 @@
 import { LangProvider, useLang } from './i18n.jsx'
+import { SectionProvider } from './context/SectionContext.jsx'
 import TopBar from './components/TopBar.jsx'
 import Terminal from './components/Terminal.jsx'
 import Sidebar from './components/Sidebar.jsx'
-import Work from './components/Work.jsx'
-import Projects from './components/Projects.jsx'
-import Contact from './components/Contact.jsx'
+import WorkPage from './components/WorkPage.jsx'
+import EducationPage from './components/EducationPage.jsx'
+import ProjectsPage from './components/ProjectsPage.jsx'
 
 function terminalLinesFor(lang) {
   return lang === 'zh'
@@ -44,6 +45,7 @@ function Footer() {
 function Shell() {
   const { lang } = useLang()
   const terminalLines = terminalLinesFor(lang)
+
   return (
     <>
       <TopBar />
@@ -51,9 +53,10 @@ function Shell() {
         <Sidebar />
         <main className="content">
           <Terminal key={lang} lines={terminalLines} />
-          <Work />
-          <Projects />
-          <Contact />
+          <WorkPage workId="cair" />
+          <WorkPage workId="huawei" />
+          <EducationPage />
+          <ProjectsPage />
           <Footer />
         </main>
       </div>
@@ -64,7 +67,9 @@ function Shell() {
 export default function App() {
   return (
     <LangProvider>
-      <Shell />
+      <SectionProvider>
+        <Shell />
+      </SectionProvider>
     </LangProvider>
   )
 }
