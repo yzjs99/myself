@@ -1,24 +1,33 @@
 import Accordion from './Accordion.jsx'
 import { workExperience, education, achievements } from '../data/resume.js'
+import { useLang } from '../i18n.jsx'
 
 export default function Work() {
+  const { tx, other } = useLang()
+
+  const T = {
+    work: { zh: '工作经历', en: 'Work Experience' },
+    education: { zh: '教育背景', en: 'Education' },
+    achievements: { zh: '荣誉奖项', en: 'Achievements' },
+  }
+
   return (
     <section className="block">
-      <Accordion id="work" index="01" title="工作经历" subtitle="Work Experience" defaultOpen>
+      <Accordion id="work" index="01" title={tx(T.work)} subtitle={other(T.work)} defaultOpen>
         <div className="entry-list">
           {workExperience.map((w) => (
-            <article key={w.company} className="entry">
+            <article key={tx(w.company)} className="entry">
               <header className="entry-head">
                 <div>
-                  <h3 className="entry-role">{w.role}</h3>
-                  <p className="entry-org">{w.company}</p>
+                  <h3 className="entry-role">{tx(w.role)}</h3>
+                  <p className="entry-org">{tx(w.company)}</p>
                 </div>
                 <span className="entry-period">{w.period}</span>
               </header>
-              {w.highlight && <p className="entry-highlight">🏆 {w.highlight}</p>}
+              {w.highlight && <p className="entry-highlight">🏆 {tx(w.highlight)}</p>}
               <ul className="entry-points">
                 {w.points.map((p, i) => (
-                  <li key={i}>{p}</li>
+                  <li key={i}>{tx(p)}</li>
                 ))}
               </ul>
             </article>
@@ -26,34 +35,34 @@ export default function Work() {
         </div>
       </Accordion>
 
-      <Accordion id="education" index="02" title="教育背景" subtitle="Education">
+      <Accordion id="education" index="02" title={tx(T.education)} subtitle={other(T.education)}>
         <div className="entry-list">
           {education.map((e) => (
-            <article key={e.school} className="entry">
+            <article key={tx(e.school)} className="entry">
               <header className="entry-head">
                 <div>
-                  <h3 className="entry-role">{e.degree}</h3>
-                  <p className="entry-org">{e.school}</p>
+                  <h3 className="entry-role">{tx(e.degree)}</h3>
+                  <p className="entry-org">{tx(e.school)}</p>
                 </div>
                 <span className="entry-period">{e.period}</span>
               </header>
-              <p className="entry-note">{e.note}</p>
+              <p className="entry-note">{tx(e.note)}</p>
             </article>
           ))}
         </div>
       </Accordion>
 
-      <Accordion id="achievements" index="03" title="荣誉奖项" subtitle="Achievements">
+      <Accordion id="achievements" index="03" title={tx(T.achievements)} subtitle={other(T.achievements)}>
         <div className="entry-list">
           {achievements.map((a) => (
-            <article key={a.title} className="entry">
+            <article key={tx(a.title)} className="entry">
               <header className="entry-head">
                 <div>
-                  <h3 className="entry-role">{a.title}</h3>
+                  <h3 className="entry-role">{tx(a.title)}</h3>
                 </div>
                 <span className="entry-period">{a.period}</span>
               </header>
-              <p className="entry-note">{a.note}</p>
+              <p className="entry-note">{tx(a.note)}</p>
             </article>
           ))}
         </div>
